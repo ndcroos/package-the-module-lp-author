@@ -1,2 +1,2 @@
-# package-and-release-the-module-lp-author
-Repository for liveProject: Package and Release the Module
+# package-the-module-lp-author
+Repository for liveProject: Package the Module
