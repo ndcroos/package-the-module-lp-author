@@ -1,0 +1,1 @@
+Invoke-ScriptAnalyzer -Path "$PSScriptRoot/../source" -Settings "$PSScriptRoot/PSScriptAnalyzerSettings.psd1" -Recurse

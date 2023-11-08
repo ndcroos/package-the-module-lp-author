@@ -1,0 +1,44 @@
+name: CI
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install ModuleBuilder
+        shell: pwsh
+        run: |
+          Install-Module -Name ModuleBuilder,Pester,PSScriptAnalyzer -Force
+
+      - name: Lint
+        shell: pwsh
+        run: |
+          . ./test/lint.ps1
+        
+      - name: Build Module
+        shell: pwsh
+        run: |
+          . ./build.ps1
+
+      - name: Pester
+        shell: pwsh
+        run: |
+          . ./test/test.ps1
+        env:
+          GHTOKEN: ${{ secrets.GHTOKEN }}
+          TESTOWNER: ${{ vars.TESTOWNER }}
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Rct.GitHub
+          path: build/Rct.GitHub/
