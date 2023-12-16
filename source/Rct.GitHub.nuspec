@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <!-- Required elements-->
+        <id>TODO</id>
+        <version>TODO</version>
+        <description>TODO</description>
+        <authors>TODO</authors>
+        <!-- Optional elements -->
+        <tags>PSModule GitHub API</tags>
+    </metadata>
+    <!-- Optional 'files' node -->
+</package>
