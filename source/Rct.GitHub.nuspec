@@ -2,10 +2,10 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <!-- Required elements-->
-        <id>TODO</id>
-        <version>TODO</version>
-        <description>TODO</description>
-        <authors>TODO</authors>
+        <id>1</id>
+        <version>1.0</version>
+        <description>Powershell module</description>
+        <authors>Nick Decroos</authors>
         <!-- Optional elements -->
         <tags>PSModule GitHub API</tags>
     </metadata>
