@@ -3,7 +3,7 @@
     <metadata>
         <!-- Required elements-->
         <id>1</id>
-        <version>1.0</version>
+        <version>1.0.0</version>
         <description>Powershell module</description>
         <authors>Nick Decroos</authors>
         <!-- Optional elements -->
