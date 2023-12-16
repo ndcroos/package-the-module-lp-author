@@ -6,6 +6,10 @@ param (
 
 #Requires -Module "ModuleBuilder"
 
+#TODO remove v from version
+
+$nuget = Get-Command -Name nuget -CommandType Application | Select-Object -First 1
+
 $params = @{
     SourcePath = "$PSScriptRoot/source/Rct.GitHub.psd1" 
     UnversionedOutputDirectory = $true
@@ -15,6 +19,7 @@ $params = @{
     OutputDirectory = "$PSScriptRoot/build/Rct.GitHub"
     SourceDirectories = @("public", "private")
     PublicFilter = "public\*.ps1"
+    CopyPaths = @("Rct.GitHub.nuspec")
 }
 
 Write-Host "Building module [$Name] [$Version]"
@@ -34,3 +39,5 @@ finally
     Write-Host "Unloading module"
     Remove-Module -Name $result.Name -ErrorAction SilentlyContinue
 }
+
+& $nuget pack $("$PSScriptRoot/build/$Name/Rct.GitHub.nuspec") -OutputDirectory $("$PSScriptRoot/build/nuget") -Version $Version
