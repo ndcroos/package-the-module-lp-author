@@ -6,7 +6,11 @@ param (
 
 #Requires -Module "ModuleBuilder"
 
-#TODO remove v from version
+#remove v from version
+if ($Version[0] -eq "v")
+{
+    $Version = $Version.Substring(1)
+}
 
 #Get-Command to find nuget, and assign result to a variable
 $nuget = Get-Command -Name nuget -CommandType Application | Select-Object -First 1
