@@ -2,9 +2,9 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <!-- Required elements-->
-        <id>1</id>
+        <id>Rct.GitHub</id>
         <version>1.0.0</version>
-        <description>Powershell module</description>
+        <description>GitHub API wrapper for PowerShell</description>
         <authors>Nick Decroos</authors>
         <!-- Optional elements -->
         <tags>PSModule GitHub API</tags>
