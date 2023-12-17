@@ -8,6 +8,7 @@ param (
 
 #TODO remove v from version
 
+#Get-Command to find nuget, and assign result to a variable
 $nuget = Get-Command -Name nuget -CommandType Application | Select-Object -First 1
 
 $params = @{
@@ -40,4 +41,6 @@ finally
     Remove-Module -Name $result.Name -ErrorAction SilentlyContinue
 }
 
+# Use nuget to pack module, point it to the .nuspec file. 
+# Pass in values for output directory and version parameters.
 & $nuget pack $("$PSScriptRoot/build/$Name/Rct.GitHub.nuspec") -OutputDirectory $("$PSScriptRoot/build/nuget") -Version $Version
