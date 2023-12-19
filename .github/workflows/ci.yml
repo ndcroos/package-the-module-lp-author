@@ -12,9 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          fetch-tags: true
+          fetch-depth: 0
 
-      - name: Install ModuleBuilder
+      - name: Install Modules
         shell: pwsh
         run: |
           Install-Module -Name ModuleBuilder,Pester,PSScriptAnalyzer -Force
