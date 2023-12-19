@@ -24,10 +24,56 @@ jobs:
         run: |
           . ./test/lint.ps1
         
+	# describe: extract the most recent Git tag from the repository.
+	# fetches the latest tag with no commit information, 
+	# essentially retrieving the version number.
+	# The obtained version number is stored in the variable $version.
+	# Write-Host is used to output the Git version information 
+	# to the console.
+	# executes PowerShell script named build.ps1 
+	# using dot-sourcing (.) to run it in the current context.
+	# passes the extracted Git version as an argument 
+	# to the build.ps1 script using -Version $version.
       - name: Build Module
         shell: pwsh
         run: |
-          . ./build.ps1
+          $version = git describe --tags --abbrev=0 
+          Write-Host "Git Version [$version]"
+          . ./build.ps1 -Version $version
+
+	# Create upload module
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Rct.GitHub
+          path: build/Rct.GitHub/
+
+	# Create nuget package
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: nuget
+          path: build/nuget/
+
+  tests:
+    needs: build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Modules
+        shell: pwsh
+        run: |
+          Install-Module -Name Pester -Force
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: Rct.GitHub
+          path: build/Rct.GitHub/
 
       - name: Pester
         shell: pwsh
@@ -36,9 +82,3 @@ jobs:
         env:
           GHTOKEN: ${{ secrets.GHTOKEN }}
           TESTOWNER: ${{ vars.TESTOWNER }}
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: Rct.GitHub
-          path: build/Rct.GitHub/
